@@ -1,5 +1,6 @@
 package com.example.messenger
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -31,11 +32,18 @@ class HomeActivity : AppCompatActivity() {
             Message("Diana", "See you soon!", "Tue")
         )
 
-        adapter = MessageAdapter(messages)
-        recyclerView.adapter = adapter
+        adapter = MessageAdapter(messages) { message ->
+            val intent = Intent(this, ChatActivity::class.java)
+            intent.putExtra("chatTitle", message.sender)
+            startActivity(intent)
+        }
+
+        recyclerView.adapter = adapter // ✅ This line was missing
 
         fab.setOnClickListener {
-            Toast.makeText(this, "Start Chat clicked!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, StartChatActivity::class.java)
+            startActivity(intent)
         }
     }
+
 }
