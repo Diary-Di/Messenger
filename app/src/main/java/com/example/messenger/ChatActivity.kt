@@ -6,42 +6,47 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.messenger.adapter.MessageAdapter
-import com.example.messenger.model.Message
+import com.example.messenger.adapter.ChatAdapter
+import com.example.messenger.model.ChatMessage
 import com.google.android.material.appbar.MaterialToolbar
 
 class ChatActivity : AppCompatActivity() {
 
-    private lateinit var adapter: MessageAdapter
-    private lateinit var messageList: MutableList<Message>
+    private lateinit var adapter: ChatAdapter
+    private lateinit var messageList: MutableList<ChatMessage>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
+        // Setup toolbar
         val toolbar = findViewById<MaterialToolbar>(R.id.chatToolbar)
         val title = intent.getStringExtra("chatTitle")
         toolbar.title = title ?: "Chat"
         toolbar.setNavigationOnClickListener { finish() }
 
+        // Find views
         val recyclerView = findViewById<RecyclerView>(R.id.chatRecyclerView)
         val messageInput = findViewById<EditText>(R.id.messageInput)
         val sendButton = findViewById<ImageButton>(R.id.sendButton)
 
+        // Dummy static chat messages
         messageList = mutableListOf(
-            Message("Me", "Hey, how are you?", "10:00 AM"),
-            Message("You", "I'm good, and you?", "10:01 AM"),
-            Message("Me", "Doing well, thanks!", "10:02 AM")
+            ChatMessage("Hey, how are you?", false),
+            ChatMessage("I'm good, and you?", true),
+            ChatMessage("Doing great, thanks!", false)
         )
 
-        adapter = MessageAdapter(messageList) {}
+        // Setup adapter and RecyclerView
+        adapter = ChatAdapter(messageList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
+        // Send button logic
         sendButton.setOnClickListener {
-            val text = messageInput.text.toString()
+            val text = messageInput.text.toString().trim()
             if (text.isNotEmpty()) {
-                messageList.add(Message("Me", text, "Now"))
+                messageList.add(ChatMessage(text, true))
                 adapter.notifyItemInserted(messageList.size - 1)
                 recyclerView.scrollToPosition(messageList.size - 1)
                 messageInput.text.clear()

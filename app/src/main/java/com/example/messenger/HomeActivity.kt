@@ -2,7 +2,6 @@ package com.example.messenger
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        recyclerView.adapter = adapter // ✅ This line was missing
+        recyclerView.adapter = adapter
 
         fab.setOnClickListener {
             val intent = Intent(this, StartChatActivity::class.java)
