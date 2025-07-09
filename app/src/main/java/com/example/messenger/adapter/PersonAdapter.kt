@@ -8,11 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.R
 import com.example.messenger.model.Person
 
-class PersonAdapter(private val people: List<Person>) :
-    RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
+class PersonAdapter(
+    private val people: List<Person>,
+    private val onClick: (Person) -> Unit
+) : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
 
-    class PersonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class PersonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.personName)
+
+        init {
+            itemView.setOnClickListener {
+                val person = people[adapterPosition]
+                onClick(person)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {

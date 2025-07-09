@@ -1,5 +1,6 @@
 package com.example.messenger
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,8 @@ class StartChatActivity : AppCompatActivity() {
         // Setup toolbar
         val toolbar = findViewById<MaterialToolbar>(R.id.startChatToolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.title = "Nouveau message"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener {
             finish() // Return to HomeActivity
         }
@@ -32,7 +35,13 @@ class StartChatActivity : AppCompatActivity() {
             Person("Diana Ray")
         )
 
-        val adapter = PersonAdapter(people)
+        // Adapter with click listener to start chat
+        val adapter = PersonAdapter(people) { person ->
+            val intent = Intent(this, ChatActivity::class.java)
+            intent.putExtra("chatTitle", person.name)
+            startActivity(intent)
+        }
+
         recyclerView.adapter = adapter
     }
 }
