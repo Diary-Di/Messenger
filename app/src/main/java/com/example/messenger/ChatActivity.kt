@@ -1,5 +1,6 @@
 package com.example.messenger
 
+import BaseActivity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
@@ -11,7 +12,7 @@ import com.example.messenger.adapter.ChatAdapter
 import com.example.messenger.model.ChatMessage
 import com.google.android.material.appbar.MaterialToolbar
 
-class ChatActivity : AppCompatActivity() {
+class ChatActivity : BaseActivity() {
 
     private lateinit var adapter: ChatAdapter
     private lateinit var messageList: MutableList<ChatMessage>

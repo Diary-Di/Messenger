@@ -1,5 +1,6 @@
 package com.example.messenger
 
+import BaseActivity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,7 @@ import com.example.messenger.adapter.PersonAdapter
 import com.example.messenger.model.Person
 import com.google.android.material.appbar.MaterialToolbar
 
-class StartChatActivity : AppCompatActivity() {
+class StartChatActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
