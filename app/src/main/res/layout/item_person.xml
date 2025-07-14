@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/personIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/user_icon"
+        android:scaleType="centerCrop"
+        android:background="@drawable/circle_background"
+        android:padding="2dp"
+        android:layout_marginEnd="12dp" />
+
+    <TextView
+        android:id="@+id/personName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Person Name"
+        android:textSize="16sp"
+        android:textColor="#000000" />
+</LinearLayout>
